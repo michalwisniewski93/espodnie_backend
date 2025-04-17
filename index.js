@@ -20,6 +20,9 @@ const ProductCategories = require("./models/ProductCategories")
 const Products = require("./models/Products")
 const Sites = require("./models/Sites")
 const Favourites = require("./models/Favourites")
+const Baskets = require("./models/Baskets")
+const Orders = require("./models/Orders")
+const Invoices = require("./models/Invoices")
 
 
 
@@ -363,6 +366,127 @@ app.put("/favourites/:id", async (req, res) => {
     res.status(400).send("Error updating favourites");
   }
 });
+
+
+app.get("/baskets", async (req, res) => {
+  try {
+    const baskets = await Baskets.find();
+    res.json(baskets);
+    
+  } catch (err) {
+    res.status(400).send("Error fetching baskets");
+  }
+});
+
+
+app.post('/baskets', async (req, res) => {
+  const newBaskets = new Baskets({
+    user: req.body.user,
+    boughtProducts: req.body.boughtProducts
+    
+  })
+  try {
+    await newBaskets.save();
+    res.status(201).json(newBaskets);
+  } catch (err) {
+    res.status(400).send("Error adding baskets");
+  }
+})
+
+app.put("/baskets/:id", async (req, res) => {
+  try {
+    const updatedBaskets = await Baskets.findByIdAndUpdate(
+      req.params.id,  // Znajdź element po ID
+      { user: req.body.user, boughtProducts: req.body.boughtProducts},  // Zaktualizuj dane
+      { new: true }  // Zwróć zaktualizowany obiekt
+    );
+    res.json(updatedBaskets);
+  } catch (err) {
+    res.status(400).send("Error updating baskets");
+  }
+});
+
+
+app.get("/orders", async (req, res) => {
+  try {
+    const orders = await Orders.find();
+    res.json(orders);
+    
+  } catch (err) {
+    res.status(400).send("Error fetching orders");
+  }
+});
+
+
+app.post('/orders', async (req, res) => {
+  const newOrders = new Orders({
+    customername: req.body.customername,
+    customersurname: req.body.customersurname,
+    customerstreet: req.body.customerstreet,
+    customerpostcode: req.body.customerpostcode,
+    customercity: req.body.customercity,
+    customercompanyname: req.body.customercompanyname,
+    customercompanystreet: req.body.customercompanystreet,
+    customercompanypostcode: req.body.customercompanypostcode,
+    customercompanycity: req.body.customercompanycity,
+    customeremail: req.body.customeremail,
+    customerinvoice: req.body.customerinvoice,
+    customerlogin: req.body.customerlogin,
+    customernewsletter: req.body.customernewsletter,
+    customerpassword: req.body.customerpassword,
+    customerphonenumber: req.body.customerphonenumber,
+    customerregulations: req.body.customerregulations,
+    customercompanynip: req.body.customercompanynip,
+    customercompanyregon: req.body.customercompanyregon,
+    boughtProducts: req.body.boughtProducts,
+    date:req.body.date,
+    amount: req.body.amount
+    
+  })
+  try {
+    await newOrders.save();
+    res.status(201).json(newOrders);
+  } catch (err) {
+    res.status(400).send("Error adding Orders");
+  }
+})
+
+app.get("/invoices", async (req, res) => {
+  try {
+    const invoices = await Invoices.find();
+    res.json(invoices);
+    
+  } catch (err) {
+    res.status(400).send("Error fetching invoices");
+  }
+});
+
+app.post('/invoices', async (req, res) => {
+  const newInvoices = new Invoices({
+    customername: req.body.customername,
+    customersurname: req.body.customersurname,
+    customercompanyname: req.body.customercompanyname,
+    customercompanystreet: req.body.customercompanystreet,
+    customercompanypostcode: req.body.customercompanypostcode,
+    customercompanycity: req.body.customercompanycity,
+    customeremail: req.body.customeremail,
+    customerphonenumber: req.body.customerphonenumber,
+    customercompanynip: req.body.customercompanynip,
+    customercompanyregon: req.body.customercompanyregon,
+    boughtProducts: req.body.boughtProducts,
+    date: req.body.date,
+    amount: req.body.amount 
+   
+    
+  })
+  try {
+    await newInvoices.save();
+    res.status(201).json(newInvoices);
+  } catch (err) {
+    res.status(400).send("Error adding Invoices");
+  }
+})
+
 
 
 // Uruchamiamy serwer
