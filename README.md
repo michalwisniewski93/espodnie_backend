@@ -1,9 +1,9 @@
-# Jesteś w repozytorium 'espodnie_backend'. To repozytorium zawiera back-end aplikacji e-spodnie.
+## Jesteś w repozytorium 'espodnie_backend'. To repozytorium zawiera back-end aplikacji e-spodnie.
 
-# Aby pobrać ten projekt na swój komputer i przetestować działanie.
+ Aby pobrać ten projekt na swój komputer i przetestować działanie.
 
-# 1.) Pobierz to repozytorium poleceniem
-# git clone https://github.com/michalwisniewski93/espodnie_backend.git
+ 1.) Pobierz to repozytorium poleceniem
+ ``` git clone https://github.com/michalwisniewski93/espodnie_backend.git ```
 # 2.) wpisz komendę 
 # npm install 
 # aby zainstalowały się dependencies i pobrał folder node modules
